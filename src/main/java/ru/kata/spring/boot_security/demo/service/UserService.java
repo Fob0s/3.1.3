@@ -89,11 +89,9 @@ public class UserService implements UserDetailsService {
     @Transactional
     public boolean addAdminRole(int id) {
         if (userRepository.findById(id).isEmpty()) {
-            System.out.println("No data");
-            return false;
+            return false; // no data
         }else if (userRepository.findById(id).get().getRoles().contains(roleRepository.getById(2))){
-            System.out.println("User have role ADMIN");
-            return false;
+            return false; // have admin role
         }else {
             User updateUser = userRepository.findById(id).get();
             Role roleAdmin = roleRepository.getById(2);
@@ -108,15 +106,12 @@ public class UserService implements UserDetailsService {
     @Transactional
     public boolean removeAdminRole(int id) {
         if (userRepository.findById(id).isEmpty()) {
-            System.out.println("No data");
-            return false;
+            return false; // no data
         } else if (!userRepository.findById(id).get().getRoles().contains(roleRepository.getById(2))){
-            System.out.println("User don't have role ADMIN");
-            return false;
+            return false;  // don't have admin role
         } else {
             User updateUser = userRepository.findById(id).get();
             updateUser.getRoles().remove(roleRepository.getById(2));
-            System.out.println("Good work method");
             return true;
         }
     }
