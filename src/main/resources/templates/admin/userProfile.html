@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User profile</title>
+</head>
+<body>
+
+<h2> Profile user</h2>
+<br>
+<br>
+<br>
+<h3 th:text= "'Profile login: ' + ${user.getUserName()}"> value</h3>
+<hr/>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Login</td>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Age</td>
+        <td>Email</td>
+    </tr>
+    <tr>
+        <td th:text = "${user.getId()}">test</td>
+        <td th:text = "${user.getUsername()}">test</td>
+        <td th:text = "${user.getUserName()}">test</td>
+        <td th:text = "${user.getUserSurname()}">test</td>
+        <td th:text = "${user.getAge()}">test</td>
+        <td th:text = "${user.getEmail()}">test</td>
+    </tr>
+</table>
+<hr/>
+<form th:action="@{/admin/{id}/update(id=${user.id})}">
+    <input type="hidden" th:value="${user.id}" name = "id">
+    <button>Update user</button>
+</form>
+<br>
+<form th:action="@{/admin/{id}/delete (id=${user.id})}" method="post">
+    <input type="hidden" th:value="${user.id}" name = "id">
+    <button>Delete user</button>
+</form>
+
+<hr/>
+<br>
+<form action="/admin">
+    <button>Back admin page</button>
+</form>
+<br>
+<form action="/logout">
+    <button>Log out</button>
+</form>
+<hr/>
+
+</body>
+</html>

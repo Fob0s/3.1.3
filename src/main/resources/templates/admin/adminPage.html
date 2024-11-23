@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin page</title>
+</head>
+<body>
+<h2> Admin page</h2>
+<hr/>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Login</td>
+        <td>Name</td>
+        <td>Surname</td>
+        <td>Age</td>
+        <td>Email</td>
+        <td>Details</td>
+        <td>Add admin role</td>
+        <td>Remove admin role</td>
+    </tr>
+    <tr th:each = "user : ${allUser}">
+        <td th:text = "${user.getId()}">value</td>
+        <td th:text = "${user.getUsername()}">value</td>
+        <td th:text = "${user.getUserName()}">value</td>
+        <td th:text = "${user.getUserSurname()}">value</td>
+        <td th:text = "${user.getAge()}">value</td>
+        <td th:text = "${user.getEmail()}">value</td>
+        <td><form th:action = "@{/admin/{id} (id = ${user.getId()})}">
+            <button>info / update / delete </button>
+        </form>
+        <td> <form th:action="@{/admin/{id}/addAdmin(id=${user.id})}" method="post">
+            <input type="hidden" th:value="${user.id}" name = "id">
+            <button> Add admin role</button>
+        </form></td>
+        <td> <form th:action="@{/admin/{id}/removeAdmin(id=${user.id})}" method="post">
+            <input type="hidden" th:value="${user.id}" name = "id">
+            <button> Remove admin role</button>
+        </form></td>
+    </tr>
+</table>
+
+<hr/>
+<form action="/admin/new">
+    <button>Create user</button>
+</form>
+<br>
+<form action="/logout">
+    <button>Log out</button>
+</form>
+
+
+
+
+</body>
+</html>
